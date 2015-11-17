@@ -25,6 +25,11 @@ def crop_resize(image, size, exact_size=False, crop_mode=CM_AUTO):
 
     size = list(size)
 
+    if not size[0]:
+        size[0] = size[1] * image.size[0] / image.size[1]
+    elif not size[1]:
+        size[1] = size[0] * image.size[1] / image.size[0]
+
     image_ar = image.size[0]/float(image.size[1])
     new_image_ar = size[0]/float(size[1])
     _crop = (crop_mode == CM_FORCECROP) or \
